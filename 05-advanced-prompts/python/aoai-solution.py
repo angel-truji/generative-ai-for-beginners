@@ -6,7 +6,7 @@
 
 # - Implement error handling to provide meaningful error messages to the user in case of errors. You can use the @app.errorhandler() decorator to handle exceptions and return an error response.
 
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Length, Email
@@ -26,7 +26,8 @@ def hello():
         name = form.name.data
         email = form.email.data
         return f'Hello, {name} ({email})!'
-    return form.render_template()
+    # Use Flask's render_template to render the form in an HTML template
+    return render_template('form.html', form=form)
 
 @app.errorhandler(400)
 def bad_request(error):
